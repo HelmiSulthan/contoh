@@ -1,139 +1,50 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Ular-Ularan</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: white;
-      font-family: sans-serif;
-      flex-direction: column;
-    }
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test coba</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
 
-    canvas {
-      background-color: #222;
-      border: 3px solid #00ff88;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Game Ular-Ularan</h1>
-  <canvas id="game" width="400" height="400"></canvas>
-  <p>Gunakan tombol panah untuk mengendalikan ular</p>
-
-  <script>
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
-
-    const gridSize = 20;
-    const tileCount = canvas.width / gridSize;
-
-    let snake = [{ x: 10, y: 10 }];
-    let food = { x: 15, y: 15 };
-    let dx = 0;
-    let dy = 0;
-    let gameInterval;
-
-    function drawRect(x, y, color) {
-      ctx.fillStyle = color;
-      ctx.fillRect(x * gridSize, y * gridSize, gridSize - 2, gridSize - 2);
-    }
-
-    function drawGame() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Gambar makanan
-      drawRect(food.x, food.y, "#f00");
-
-      // Gambar ular
-      snake.forEach((segment, index) => {
-        drawRect(segment.x, segment.y, index === 0 ? "#0f0" : "#0b0");
-      });
-
-      moveSnake();
-      checkCollision();
-    }
-
-    function moveSnake() {
-      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-      snake.unshift(head);
-
-      // Makan makanan
-      if (head.x === food.x && head.y === food.y) {
-        placeFood();
-      } else {
-        snake.pop();
-      }
-    }
-
-    function placeFood() {
-      food = {
-        x: Math.floor(Math.random() * tileCount),
-        y: Math.floor(Math.random() * tileCount)
-      };
-    }
-
-    function checkCollision() {
-      const head = snake[0];
-
-      // Nabrak tembok
-      if (head.x < 0 || head.y < 0 || head.x >= tileCount || head.y >= tileCount) {
-        gameOver();
-      }
-
-      // Nabrak badan sendiri
-      for (let i = 1; i < snake.length; i++) {
-        if (head.x === snake[i].x && head.y === snake[i].y) {
-          gameOver();
-        }
-      }
-    }
-
-    function gameOver() {
-      clearInterval(gameInterval);
-      alert("Game Over! Skor: " + (snake.length - 1));
-      document.location.reload();
-    }
-
-    document.addEventListener("keydown", (e) => {
-      switch (e.key) {
-        case "ArrowUp":
-          if (dy === 0) { dx = 0; dy = -1; }
-          break;
-        case "ArrowDown":
-          if (dy === 0) { dx = 0; dy = 1; }
-          break;
-        case "ArrowLeft":
-          if (dx === 0) { dx = -1; dy = 0; }
-          break;
-        case "ArrowRight":
-          if (dx === 0) { dx = 1; dy = 0; }
-          break;
-      }
-    });
-
-    function startGame() {
-      dx = 1;
-      dy = 0;
-      gameInterval = setInterval(drawGame, 100);
-    }
-
-    startGame();
-  </script>
-</body>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  </body>
 </html>
